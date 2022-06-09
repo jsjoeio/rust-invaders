@@ -10,10 +10,19 @@ mod player;
 
 const PLAYER_SPRITE: &str = "player_a_01.png";
 const PLAYER_SIZE: (f32, f32) = (144., 75.);
+const PLAYER_LASER_SPRITE: &str = "laser_a_01.png";
+const PLAYER_LAYER_SIZE: (f32, f32) = (9., 54.);
 
 const SPRITE_SCALE: f32 = 0.5;
 
 // endregion: --- Asset Constants
+
+// region: --- Game Constants
+
+const TIME_STEP: f32 = 1. / 20.;
+const BASE_SPEED: f32 = 1500.;
+
+// endregion: --- Game Constants
 
 // region: --- Resources
 
@@ -24,6 +33,7 @@ pub struct WinSize {
 
 struct GameTextures {
     player: Handle<Image>,
+    player_laser: Handle<Image>,
 }
 
 // endregion: --- Resources
@@ -65,6 +75,7 @@ fn setup_system(
     // add GameTextures resource
     let game_textures = GameTextures {
         player: asset_server.load(PLAYER_SPRITE),
+        player_laser: asset_server.load(PLAYER_LASER_SPRITE),
     };
     commands.insert_resource(game_textures);
 }
